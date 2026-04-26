@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de QR Code - Restaurante Sabor & Reserva</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; color: #111; background: #f8fafc; }
+    .card { max-width: 520px; margin: 0 auto; background: #fff; padding: 1.5rem; border-radius: 16px; box-shadow: 0 16px 40px rgba(15,23,42,.12); }
+    h1 { font-size: 1.5rem; margin-bottom: .75rem; }
+    label { display: block; margin-bottom: .5rem; font-weight: 600; }
+    input { width: 100%; padding: .75rem 1rem; border: 1px solid #d1d5db; border-radius: 12px; margin-bottom: 1rem; font-size: 1rem; }
+    button { display: inline-flex; align-items: center; justify-content: center; background: #0f172a; color: #fff; border: none; border-radius: 999px; padding: .85rem 1.3rem; cursor: pointer; font-size: 1rem; }
+    img { display: block; margin: 1rem auto; max-width: 100%; }
+    .hint { color: #475569; margin-top: 1rem; font-size: .95rem; }
+    .download-link { display: inline-block; margin-top: 1rem; color: #0f172a; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Gerador de QR Code</h1>
+    <p class="hint">Digite o endereço do site local ou do servidor e escaneie com o telemóvel.</p>
+    <label for="urlInput">URL para escanear</label>
+    <input id="urlInput" type="text" placeholder="http://192.168.1.xxx:5500/index.html" value="http://127.0.0.1:5500/index.html">
+    <button id="generateBtn" type="button">Gerar QR Code</button>
+    <div id="result" class="result"></div>
+    <p class="hint">Use o IP do seu PC na mesma rede Wi-Fi, não use localhost no telemóvel.</p>
+  </div>
+
+  <script>
+    const urlInput = document.getElementById('urlInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const result = document.getElementById('result');
+
+    function updateQr(url) {
+      const encoded = encodeURIComponent(url.trim());
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encoded}`;
+      result.innerHTML = `
+        <img src="${qrUrl}" alt="QR Code para ${url}">
+        <a class="download-link" href="${qrUrl}" download="qr-code.png">Baixar QR Code</a>
+      `;
+    }
+
+    generateBtn.addEventListener('click', () => {
+      const url = urlInput.value.trim();
+      if (!url) {
+        alert('Digite um URL válido para gerar o QR Code.');
+        return;
+      }
+      updateQr(url);
+    });
+
+    // Gera o QR inicial com o valor padrão
+    updateQr(urlInput.value);
+  </script>
+</body>
+</html>
