@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="manifest.webmanifest">
+    <title>Restaurante Sabor & Reserva</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">Restaurante Sabor & Reserva</span>
+            <h1>Sistema completo de pratos, reservas e encomendas</h1>
+            <p>Confira nosso menu, reserve sua mesa e faça encomendas direto online.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn">Ver Menu</a>
+                <a href="#reserva" class="btn btn-secondary">Fazer Reserva</a>
+                <button id="installButton" class="btn btn-secondary btn-small hidden" type="button">Instalar App</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Prato de comida deliciosa">
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="menu" class="section">
+            <div class="section-header">
+                <h2>Nosso Menu</h2>
+                <p>Escolha entre pratos tradicionais, sobremesas e combos especiais.</p>
+            </div>
+            <div id="dishGrid" class="dish-grid"></div>
+        </section>
+
+        <section id="reserva" class="section split-section">
+            <div class="section-block">
+                <h2>Reservar Mesa</h2>
+                <p>Reserve a sua mesa de forma rápida e segura.</p>
+                <form id="reservationForm" class="form-card">
+                    <label>Nome completo<input type="text" id="resName" required></label>
+                    <label>Email<input type="email" id="resEmail" required></label>
+                    <label>Data<input type="date" id="resDate" required></label>
+                    <label>Horário<input type="time" id="resTime" required></label>
+                    <label>Pessoas<input type="number" id="resGuests" min="1" value="2" required></label>
+                    <label>Observações<textarea id="resNotes" rows="3" placeholder="Alguma preferência?"></textarea></label>
+                    <button type="submit" class="btn">Confirmar Reserva</button>
+                </form>
+            </div>
+            <div class="section-block summary-card">
+                <h3>Suas Reservas</h3>
+                <div id="reservationsList" class="list"></div>
+            </div>
+        </section>
+
+        <section id="encomendas" class="section split-section">
+            <div class="section-block">
+                <h2>Encomendas</h2>
+                <p>Monte seu pedido e finalize com apenas um clique.</p>
+                <div class="cart-card">
+                    <div id="cartItems" class="cart-items"></div>
+                    <div class="cart-footer">
+                        <div class="cart-total">
+                            <span>Total:</span>
+                            <strong id="cartTotal">R$ 0,00</strong>
+                        </div>
+                        <button id="checkoutButton" class="btn" disabled>Finalizar Encomenda</button>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block summary-card">
+                <h3>Histórico de Encomendas</h3>
+                <div id="ordersList" class="list"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Restaurante Sabor & Reserva • Atendimento diário das 11h às 23h • Peça e reserve online</p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
